@@ -13,8 +13,6 @@
                                         <tr>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-grey">Id</th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-grey">Name</th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-grey">Email</th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-grey">Date Registered</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -22,8 +20,6 @@
                                             <tr class="bg-white">
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"> {{ $user->id }} </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"> {{ $user->name }} </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"> {{ $user->email }} </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"> {{ $user->created_at }} </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
