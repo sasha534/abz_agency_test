@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
+use App\Service\TinypngService;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -24,7 +25,8 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         ])->validateWithBag('updateProfileInformation');
 
         if (isset($input['photo'])) {
-            dd("ADD Service for chANge photo here");
+            // $resizedAvatarPhoto = new TinypngService($input['photo']);
+            // $resizedAvatarPhoto->resizeAvatar();
             $user->updateProfilePhoto($input['photo']);
         }
 
