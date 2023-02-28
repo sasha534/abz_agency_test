@@ -4,36 +4,39 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\User;
-use Livewire\WithPagination;
+use Illuminate\Support\Collection;
 
 class UserList extends Component
 {
-    use WithPagination;
+    public $users;
 
-    public int $paginationCount = 10;
+    public $pageNumber = 1;
 
-    public string $sortUsersByName = 'asc';
+    public $hasMorePages;
 
-    public $search = null;
+    public function mount()
+    {
+        $this->users = new Collection();
 
-    public $shownTableTitles = [
-        'id', 'name', 'email', 'email_verified_at', 'password', 'remember_token', 'created_at', 'updated_at'
-    ];
+        $this->loadUsers();
+    }
+
+    public function loadUsers()
+    {
+        $users = User::paginate(6, ['*'], 'page', $this->pageNumber);
+
+        $this->pageNumber += 1;
+
+        $this->hasMorePages = $users->hasMorePages();
+
+        $this->users->push(...$users->items());
+    }
 
     public function render()
     {
-        $users = User::select($this->shownTableTitles);
-        if($this->search != null)
-        {
-            $users = $users->where('name', 'like', $this->search . '%');
-        }
-
-        $users = $users->orderBy('name', $this->sortUsersByName)
-                    ->paginate($this->paginationCount);
-
         return view('livewire.user-list',[
-                'users' => $users,
-            ])->extends('layouts.app')->section('content');
+            'users' => $this->users,
+        ])->extends('layouts.app');
 
     }
 }

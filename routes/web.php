@@ -3,16 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\UserList;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
@@ -39,7 +29,6 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
             : null;
 
     Route::group(['middleware' => array_values(array_filter([$authMiddleware, $authSessionMiddleware]))], function () {
-        // User & Profile...
         Route::get('/user/list', [UserList::class, 'render'])
                     ->name('user.list');
 
