@@ -25,9 +25,9 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         ])->validateWithBag('updateProfileInformation');
 
         if (isset($input['photo'])) {
-            // $resizedAvatarPhoto = new TinypngService($input['photo']);
-            // $resizedAvatarPhoto->resizeAvatar();
             $user->updateProfilePhoto($input['photo']);
+            $resizedAvatarPhoto = new TinypngService($user);
+            $resizedAvatarPhoto->resizeAvatar();
         }
 
         if ($input['email'] !== $user->email &&
